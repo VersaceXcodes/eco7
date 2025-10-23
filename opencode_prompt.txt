@@ -1,27 +1,32 @@
-VALIDATION FAILURE - Backend TypeScript Compilation (Attempt 31/100)
+VALIDATION FAILURE - Backend TypeScript Compilation (Attempt 32/100)
 
 The project validation failed at the "Backend TypeScript Compilation" step. You need to analyze the error and fix it.
 
 ## Error Details:
-
-[41m                                                                               [0m
-[41m[37m                This is not the tsc command you are looking for                [0m
-[41m                                                                               [0m
-
-To get access to the TypeScript compiler, [34mtsc[0m, from the command line either:
-
-- Use [1mnpm install typescript[0m to first add TypeScript to your project [1mbefore[0m using npx
-- Use [1myarn[0m to avoid accidentally running code from un-installed packages
+server.test.ts(110,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'string'.
+server.ts(43,16): error TS2345: Argument of type '{ connectionString: string; ssl: { require: boolean; }; } | { host: string; database: string; user: string; password: string; port: number; ssl: { require: boolean; }; }' is not assignable to parameter of type 'PoolConfig'.
+  Type '{ connectionString: string; ssl: { require: boolean; }; }' is not assignable to type 'PoolConfig'.
+    Types of property 'ssl' are incompatible.
+      Object literal may only specify known properties, and 'require' does not exist in type 'ConnectionOptions'.
+server.ts(116,119): error TS2339: Property 'user_id' does not exist on type 'string | JwtPayload'.
+  Property 'user_id' does not exist on type 'string'.
+server.ts(818,12): error TS2769: No overload matches this call.
+  Overload 1 of 6, '(port: number, hostname: string, backlog: number, callback?: () => void): Server<typeof IncomingMessage, typeof ServerResponse>', gave the following error.
+    Argument of type 'string | 3000' is not assignable to parameter of type 'number'.
+      Type 'string' is not assignable to type 'number'.
+  Overload 2 of 6, '(port: number, hostname: string, callback?: () => void): Server<typeof IncomingMessage, typeof ServerResponse>', gave the following error.
+    Argument of type 'string | 3000' is not assignable to parameter of type 'number'.
+      Type 'string' is not assignable to type 'number'.
 
 
 ## Validation Context:
 - Step: Backend TypeScript Compilation
 - Working Directory: /app/backend
-- Attempt: 31/100
+- Attempt: 32/100
 - Previous failures for this step: 2
 
 ## Project Memory Summary:
-- Total validation attempts: 16
+- Total validation attempts: 18
 - Common issues encountered: None
 - Known dependencies: @hookform/resolvers, @radix-ui/react-accordion, @radix-ui/react-alert-dialog, @radix-ui/react-aspect-ratio, @radix-ui/react-avatar, @radix-ui/react-checkbox, @radix-ui/react-collapsible, @radix-ui/react-context-menu, @radix-ui/react-dialog, @radix-ui/react-dropdown-menu
 - Missing dependencies: None
@@ -140,8 +145,8 @@ PROTECTED DIRECTORIES (DO NOT MODIFY):
 
 
 ## Previous Validation Failures for Backend TypeScript Compilation:
-- 5:03:58 PM: 
 - 5:04:25 PM: 
+- 5:04:56 PM: 
 
 ## Your Task:
 1. **Analyze the Error**: Understand what specifically went wrong in the Backend TypeScript Compilation step
