@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761237794636,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_TopNav",
+      "version": "1761237771760"
+    }
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/vitereact/src/components/views/GV_TopNav.tsx",
+      "type": "text",
+      "size": 2823,
+      "dependencies": false
+    }
+  ]
+}

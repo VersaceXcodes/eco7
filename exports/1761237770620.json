@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761237770620,
+  "operation": {
+    "id": "webapp:react:root",
+    "refs": {
+      "id": "app",
+      "version": "latest"
+    }
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/vitereact/src/App.tsx",
+      "type": "text",
+      "size": 4418,
+      "dependencies": false
+    }
+  ]
+}

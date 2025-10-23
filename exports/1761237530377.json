@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761237530377,
+  "operation": {
+    "id": "backend:specifications:openapi"
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/backend/openapi.yaml",
+      "type": "text",
+      "size": 13844,
+      "dependencies": false
+    }
+  ]
+}

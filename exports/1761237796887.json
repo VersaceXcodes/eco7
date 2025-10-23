@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761237796887,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_EducationalResources",
+      "version": "1761237771729"
+    }
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/vitereact/src/components/views/UV_EducationalResources.tsx",
+      "type": "text",
+      "size": 3813,
+      "dependencies": false
+    }
+  ]
+}

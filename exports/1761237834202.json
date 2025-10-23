@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761237834202,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_Partnerships",
+      "version": "1761237771753"
+    }
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/vitereact/src/components/views/UV_Partnerships.tsx",
+      "type": "text",
+      "size": 6895,
+      "dependencies": false
+    }
+  ]
+}

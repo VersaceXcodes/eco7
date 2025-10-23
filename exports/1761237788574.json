@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761237788574,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_ChallengeDashboard",
+      "version": "latest"
+    }
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/vitereact/src/components/views/UV_ChallengeDashboard.tsx",
+      "type": "text",
+      "size": 3254,
+      "dependencies": false
+    }
+  ]
+}

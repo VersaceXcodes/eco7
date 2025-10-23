@@ -1,0 +1,210 @@
+asyncapi: 2.0.0
+info:
+  title: Eco7 Realtime API
+  version: 1.0.0
+  description: AsyncAPI specification for Eco7 application realtime features.
+servers:
+  development:
+    url: http://localhost:3000
+    protocol: ws
+channels:
+  user/updates:
+    description: Channel for user updates like profile changes or authentication
+      status updates.
+    subscribe:
+      summary: Receive updates about user data changes.
+      operationId: subscribeUserUpdates
+      message:
+        $ref: "#/components/messages/UserUpdateMessage"
+  dashboard/updates:
+    description: Channel for updates to user dashboards such as new achievements or
+      challenge updates.
+    subscribe:
+      summary: Receive updates for user dashboard changes.
+      operationId: subscribeDashboardUpdates
+      message:
+        $ref: "#/components/messages/DashboardUpdateMessage"
+  carbon_footprint/updates:
+    description: Channel for broadcasting updates to user's carbon footprint.
+    subscribe:
+      summary: Receive updates about carbon footprint calculations and breakdowns.
+      operationId: subscribeCarbonFootprintUpdates
+      message:
+        $ref: "#/components/messages/CarbonFootprintUpdateMessage"
+  community/forums:
+    description: Channel for forum discussions and updates.
+    subscribe:
+      summary: Receive new forum post notifications or updates.
+      operationId: subscribeForumUpdates
+      message:
+        $ref: "#/components/messages/ForumUpdateMessage"
+  events/notifications:
+    description: Real-time notifications regarding event updates.
+    subscribe:
+      summary: Receive live updates on events like RSVPs, changes or reminders.
+      operationId: subscribeEventUpdates
+      message:
+        $ref: "#/components/messages/EventUpdateMessage"
+  challenges/updates:
+    description: Channel for updates related to challenges including new challenges
+      or completions.
+    subscribe:
+      summary: Receive challenge updates.
+      operationId: subscribeChallengeUpdates
+      message:
+        $ref: "#/components/messages/ChallengeUpdateMessage"
+  notifications:
+    description: General user notifications including alerts and reminders.
+    subscribe:
+      summary: Receive notifications such as eco tips or reminders.
+      operationId: subscribeNotifications
+      message:
+        $ref: "#/components/messages/NotificationMessage"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+          nullable: true
+        auth_token:
+          type: string
+          nullable: true
+        is_authenticated:
+          type: boolean
+        created_at:
+          type: string
+        password_hash:
+          type: string
+    Dashboard:
+      type: object
+      properties:
+        dashboard_id:
+          type: string
+        user_id:
+          type: string
+        achievements:
+          type: string
+          nullable: true
+        ongoing_challenges:
+          type: string
+          nullable: true
+        suggestions:
+          type: string
+          nullable: true
+    CarbonFootprint:
+      type: object
+      properties:
+        footprint_id:
+          type: string
+        user_id:
+          type: string
+        daily_activities:
+          type: string
+          nullable: true
+        calculated_footprint:
+          type: number
+          nullable: true
+        activity_breakdown:
+          type: string
+          nullable: true
+    Forum:
+      type: object
+      properties:
+        forum_id:
+          type: string
+        user_id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+    Event:
+      type: object
+      properties:
+        event_id:
+          type: string
+        organizer_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        location:
+          type: string
+          nullable: true
+        date_time:
+          type: string
+          nullable: true
+        rsvp:
+          type: string
+          nullable: true
+    Challenge:
+      type: object
+      properties:
+        challenge_id:
+          type: string
+        user_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        frequency:
+          type: string
+          nullable: true
+        points_awarded:
+          type: number
+          nullable: true
+    Notification:
+      type: object
+      properties:
+        notification_id:
+          type: string
+        user_id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+  messages:
+    UserUpdateMessage:
+      name: UserUpdateMessage
+      payload:
+        $ref: "#/components/schemas/User"
+    DashboardUpdateMessage:
+      name: DashboardUpdateMessage
+      payload:
+        $ref: "#/components/schemas/Dashboard"
+    CarbonFootprintUpdateMessage:
+      name: CarbonFootprintUpdateMessage
+      payload:
+        $ref: "#/components/schemas/CarbonFootprint"
+    ForumUpdateMessage:
+      name: ForumUpdateMessage
+      payload:
+        $ref: "#/components/schemas/Forum"
+    EventUpdateMessage:
+      name: EventUpdateMessage
+      payload:
+        $ref: "#/components/schemas/Event"
+    ChallengeUpdateMessage:
+      name: ChallengeUpdateMessage
+      payload:
+        $ref: "#/components/schemas/Challenge"
+    NotificationMessage:
+      name: NotificationMessage
+      payload:
+        $ref: "#/components/schemas/Notification"

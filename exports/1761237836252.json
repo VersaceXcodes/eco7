@@ -1,0 +1,19 @@
+{
+  "timestamp": 1761237836252,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_CarbonFootprintCalculator",
+      "version": "latest"
+    }
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/vitereact/src/components/views/UV_CarbonFootprintCalculator.tsx",
+      "type": "text",
+      "size": 5112,
+      "dependencies": false
+    }
+  ]
+}

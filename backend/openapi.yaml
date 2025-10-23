@@ -1,0 +1,659 @@
+openapi: 3.0.0
+info:
+  title: Eco7 API
+  description: API for Eco7, a web application promoting environmentally friendly behavior.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUserInput"
+      responses:
+        "200":
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /auth/login:
+    post:
+      summary: Authenticate user and provide auth token
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password_hash
+              properties:
+                email:
+                  type: string
+                  format: email
+                password_hash:
+                  type: string
+      responses:
+        "200":
+          description: User authenticated and token provided
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /users/{user_id}:
+    get:
+      summary: Retrieve a public user profile
+      operationId: getUserProfile
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User profile information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /profiles:
+    post:
+      summary: Create or update user profile
+      operationId: createOrUpdateUserProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProfileInput"
+      responses:
+        "200":
+          description: Profile created or updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+  /profiles/{profile_id}:
+    get:
+      summary: Retrieve user profile details
+      operationId: getProfile
+      parameters:
+        - name: profile_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Profile details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+    patch:
+      summary: Update user profile
+      operationId: updateProfile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileInput"
+      responses:
+        "200":
+          description: Profile updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+  /dashboards:
+    get:
+      summary: Retrieve user dashboard
+      operationId: getDashboard
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User dashboard information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+  /carbon-footprints:
+    post:
+      summary: Create carbon footprint record
+      operationId: createCarbonFootprint
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCarbonFootprintInput"
+      responses:
+        "200":
+          description: Carbon footprint record created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CarbonFootprint"
+    get:
+      summary: Retrieve carbon footprint records
+      operationId: getCarbonFootprints
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of carbon footprint records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CarbonFootprint"
+  /weekly-reports:
+    post:
+      summary: Create weekly report
+      operationId: createWeeklyReport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWeeklyReportInput"
+      responses:
+        "200":
+          description: Weekly report created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeeklyReport"
+    get:
+      summary: Retrieve weekly reports
+      operationId: getWeeklyReports
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of weekly reports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WeeklyReport"
+  /forums:
+    post:
+      summary: Create new forum discussion
+      operationId: createForum
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateForumInput"
+      responses:
+        "200":
+          description: Forum discussion created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Forum"
+    get:
+      summary: Retrieve forums
+      operationId: getForums
+      parameters:
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: user_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of forums
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Forum"
+  /events:
+    post:
+      summary: Create new event
+      operationId: createEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateEventInput"
+      responses:
+        "200":
+          description: Event created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+    get:
+      summary: Retrieve events
+      operationId: getEvents
+      parameters:
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: organizer_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+  /resources:
+    get:
+      summary: Retrieve educational content and resources
+      operationId: getResources
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: posted_on
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Resource"
+  /challenges:
+    post:
+      summary: Create new challenge
+      operationId: createChallenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateChallengeInput"
+      responses:
+        "200":
+          description: Challenge created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Challenge"
+    get:
+      summary: Retrieve challenges
+      operationId: getChallenges
+      parameters:
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: user_id
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of challenges
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Challenge"
+  /notifications:
+    get:
+      summary: Retrieve user notifications
+      operationId: getNotifications
+      parameters:
+        - name: user_id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Notification"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          nullable: true
+        auth_token:
+          type: string
+          nullable: true
+        is_authenticated:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        password_hash:
+          type: string
+    CreateUserInput:
+      type: object
+      required:
+        - email
+        - password_hash
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          nullable: true
+        auth_token:
+          type: string
+          nullable: true
+        password_hash:
+          type: string
+    Profile:
+      type: object
+      properties:
+        profile_id:
+          type: string
+        user_id:
+          type: string
+        eco_goals:
+          type: string
+          nullable: true
+        content_preferences:
+          type: string
+          nullable: true
+        challenge_levels:
+          type: string
+          nullable: true
+        avatar_url:
+          type: string
+          nullable: true
+    CreateProfileInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        eco_goals:
+          type: string
+          nullable: true
+        content_preferences:
+          type: string
+          nullable: true
+        challenge_levels:
+          type: string
+          nullable: true
+        avatar_url:
+          type: string
+          nullable: true
+    UpdateProfileInput:
+      type: object
+      properties:
+        profile_id:
+          type: string
+        user_id:
+          type: string
+        eco_goals:
+          type: string
+          nullable: true
+        content_preferences:
+          type: string
+          nullable: true
+        challenge_levels:
+          type: string
+          nullable: true
+        avatar_url:
+          type: string
+          nullable: true
+    Dashboard:
+      type: object
+      properties:
+        dashboard_id:
+          type: string
+        user_id:
+          type: string
+        achievements:
+          type: string
+          nullable: true
+        ongoing_challenges:
+          type: string
+          nullable: true
+        suggestions:
+          type: string
+          nullable: true
+    CarbonFootprint:
+      type: object
+      properties:
+        footprint_id:
+          type: string
+        user_id:
+          type: string
+        daily_activities:
+          type: string
+          nullable: true
+        calculated_footprint:
+          type: number
+          nullable: true
+        activity_breakdown:
+          type: string
+          nullable: true
+    CreateCarbonFootprintInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        daily_activities:
+          type: string
+          nullable: true
+        calculated_footprint:
+          type: number
+          nullable: true
+        activity_breakdown:
+          type: string
+          nullable: true
+    WeeklyReport:
+      type: object
+      properties:
+        report_id:
+          type: string
+        user_id:
+          type: string
+        performance_summary:
+          type: string
+          nullable: true
+        suggestions:
+          type: string
+          nullable: true
+    CreateWeeklyReportInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        performance_summary:
+          type: string
+          nullable: true
+        suggestions:
+          type: string
+          nullable: true
+    Forum:
+      type: object
+      properties:
+        forum_id:
+          type: string
+        user_id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    CreateForumInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+    Event:
+      type: object
+      properties:
+        event_id:
+          type: string
+        organizer_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        location:
+          type: string
+          nullable: true
+        date_time:
+          type: string
+          format: date-time
+          nullable: true
+        rsvp:
+          type: string
+          nullable: true
+    CreateEventInput:
+      type: object
+      properties:
+        organizer_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        location:
+          type: string
+          nullable: true
+        date_time:
+          type: string
+          format: date-time
+          nullable: true
+        rsvp:
+          type: string
+          nullable: true
+    Resource:
+      type: object
+      properties:
+        resource_id:
+          type: string
+        category:
+          type: string
+        content:
+          type: string
+        posted_on:
+          type: string
+          format: date-time
+    Challenge:
+      type: object
+      properties:
+        challenge_id:
+          type: string
+        user_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        frequency:
+          type: string
+          nullable: true
+        points_awarded:
+          type: number
+          nullable: true
+    CreateChallengeInput:
+      type: object
+      properties:
+        user_id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+          nullable: true
+        frequency:
+          type: string
+          nullable: true
+        points_awarded:
+          type: number
+          nullable: true
+    Notification:
+      type: object
+      properties:
+        notification_id:
+          type: string
+        user_id:
+          type: string
+        message:
+          type: string
+        type:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time

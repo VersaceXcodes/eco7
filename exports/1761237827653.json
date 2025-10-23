@@ -1,0 +1,15 @@
+{
+  "timestamp": 1761237827653,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "eco7",
+  "files": [
+    {
+      "path": "/mnt/data/eco7/backend/.env",
+      "type": "text",
+      "size": 222,
+      "dependencies": false
+    }
+  ]
+}
